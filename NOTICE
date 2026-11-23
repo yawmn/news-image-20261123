@@ -1,0 +1,16 @@
+This project embeds glyph outlines derived from the DejaVu fonts
+(DejaVu Serif Condensed Bold, DejaVu Sans Condensed Bold, DejaVu Sans Condensed).
+
+DejaVu fonts are based on Bitstream Vera fonts.
+Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved.
+DejaVu changes are in the public domain.
+
+Bitstream Vera Fonts Copyright
+
+The fonts have a generous copyright, allowing derivative works (as
+long as "Bitstream" or "Vera" are not in the names), and full
+redistribution (so long as they are not sold by themselves). They
+can be thus merged with other fonts, modified etc.
+
+The copyright and font licence text is available at:
+https://dejavu-fonts.github.io/License.html
