@@ -295,7 +295,7 @@ disc(318, 614, 5.5, RED)
 ring(318, 614, 13, 1.6, RED, 0.75)
 ring(318, 614, 22, 1.2, RED, 0.45)
 text(344, 619, 'BAHRAIN', 'sansb', 13, WHITE, 0.8)
-text(352, 540, 'IRAN', 'sansb', 20, WHITE, 1.8)
+text(352, 540, 'IRAN', 'sansb', 20, INK, 1.8)
 text(66, 696, 'SAUDI ARABIA', 'sans', 11, INK, 1.0)
 text(500, 696, 'OMAN', 'sans', 11, INK, 1.0)
 # strike arcs from Iran to Bahrain
@@ -347,7 +347,7 @@ fill_rect(RX0, 474, RX1, 476, (190, 182, 166))
 text(RX0, 502, 'EUROPE  ·  AFRICA', 'sansb', 13, RED, 2.0)
 text(RX0 - 1, 550, 'DRONES HIT', 'serif', 37, INK, -0.6)
 text(RX0 - 1, 590, 'RUSSIAN SHIP', 'serif', 37, INK, -0.6)
-paragraph(RX0, 620, 'Suspected Ukrainian sea drones strike the Merkury at Benghazi; Odesa blacked out.',
+paragraph(RX0, 620, 'Suspected Ukrainian sea drones strike the Merkury at Benghazi; Odesa hit by blackouts.',
           'sans', 16, 352, 20, (52, 51, 47))
 # sea strip with ship and drones
 fill_rect(RX0, 668, RX1, 744, DEEP)
@@ -407,7 +407,7 @@ for x0, x1, kick, h1, h2, deck, icon in cols:
 
 # ---------------------------------------------------------------- footer
 fill_rect(0, 952, W, H, INK)
-text(512, 980, 'ALSO INSIDE:  ISRAEL COALITION TALKS STALL  ·  WEST BANK SETTLER ARSON CONDEMNED  ·  HAITI HUNGER DEEPENS',
+text(512, 980, 'ALSO INSIDE:  ISRAEL COALITION TALKS STALL  ·  WEST BANK SETTLER ARSON CONDEMNED  ·  HAITI FOOD CRISIS',
      'sansb', 12, (232, 226, 213), 0.6, 'center')
 text(512, 1008, 'THE WORLD  ·  MONDAY 23 NOVEMBER 2026  ·  PAGE 1 OF 1', 'sans', 11, (147, 145, 137), 1.2, 'center')
 
