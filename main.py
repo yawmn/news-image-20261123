@@ -221,9 +221,13 @@ def text(x, y, s, font, size, c, tracking=0.0, align='left', alpha=1.0):
     scale = size / 1000.0
     for ch in s:
         g = f['glyphs'].get(ch, f['glyphs']['?'])
+        # All contours of a glyph must be filled together.  Filling the inner
+        # contour on its own turns the counters of O, A, R, P and B into ink.
+        contours = []
         for contour in g['c']:
-            pts = [(x + px * scale, y + py * scale) for px, py in contour]
-            fill_poly([pts], c, alpha)
+            contours.append([(x + px * scale, y + py * scale) for px, py in contour])
+        if contours:
+            fill_poly(contours, c, alpha)
         x += g['a'] * scale + tracking
 
 
@@ -254,26 +258,26 @@ fill_rect(0, 0, W, H, PAPER)
 
 # top rail
 fill_rect(0, 0, W, 54, INK)
-text(36, 34, 'WORLD NEWS  ·  MONDAY 23 NOVEMBER 2026', 'sansb', 17, WHITE, 0.9)
-text(988, 34, 'ONE-PAGE EDITION', 'sans', 13, (201, 194, 178), 1.2, 'right')
+text(36, 34, 'WORLD NEWS  ·  MONDAY 23 NOVEMBER 2026', 'sansb', 17, WHITE, 0.5)
+text(988, 34, 'ONE-PAGE EDITION', 'sans', 13, (201, 194, 178), 0.7, 'right')
 
 # masthead
 text(34, 160, 'THE WORLD', 'serif', 91, INK, -1.5)
 fill_rect(690, 74, 988, 170, RED)
-text(839, 103, 'MONDAY', 'sansb', 15, WHITE, 3.0, 'center')
-text(839, 150, '23 NOV 2026', 'sansb', 39, WHITE, 0.5, 'center')
+text(839, 103, 'MONDAY', 'sansb', 16, WHITE, 1.7, 'center')
+text(839, 150, '23 NOV 2026', 'sansb', 40, WHITE, 0.3, 'center')
 
 fill_rect(36, 181, 988, 185, INK)
 fill_rect(36, 188, 988, 190, RED)
-text(36, 214, "THE DAY'S NEWS IN ONE PAGE", 'sansb', 13, RED, 2.2)
-text(988, 214, 'SIX STORIES  ·  WORLDWIDE', 'sans', 13, MUTED, 1.4, 'right')
+text(36, 214, "THE DAY'S NEWS IN ONE PAGE", 'sansb', 13.5, RED, 1.3)
+text(988, 214, 'SIX STORIES  ·  WORLDWIDE', 'sans', 13.5, MUTED, 0.7, 'right')
 
 # ---------------------------------------------------------------- lead
 LX0, LX1 = 36, 604
-text(LX0, 240, 'LEAD STORY  ·  GULF', 'sansb', 14, RED, 2.4)
-text(LX0 - 2, 294, 'IRAN CLAIMS', 'serif', 52, INK, -1.0)
-text(LX0 - 2, 348, 'STRIKES ON US', 'serif', 52, INK, -1.0)
-text(LX0 - 2, 402, 'BASES IN BAHRAIN', 'serif', 52, INK, -1.0)
+text(LX0, 240, 'LEAD STORY  ·  GULF', 'sansb', 14, RED, 1.2)
+text(LX0 - 2, 294, 'IRAN CLAIMS', 'serif', 54, INK, -0.8)
+text(LX0 - 2, 348, 'STRIKES ON US', 'serif', 54, INK, -0.8)
+text(LX0 - 2, 402, 'BASES IN BAHRAIN', 'serif', 54, INK, -0.8)
 paragraph(LX0, 438, "Trump seeks a \u2018permanent\u2019 deal as attacks on Hormuz shipping escalate and oil holds near $92.",
           'sans', 19, 548, 24, (44, 44, 41))
 
@@ -294,10 +298,10 @@ for i in range(4):
 disc(318, 614, 5.5, RED)
 ring(318, 614, 13, 1.6, RED, 0.75)
 ring(318, 614, 22, 1.2, RED, 0.45)
-text(344, 619, 'BAHRAIN', 'sansb', 13, WHITE, 0.8)
-text(352, 540, 'IRAN', 'sansb', 20, INK, 1.8)
-text(66, 696, 'SAUDI ARABIA', 'sans', 11, INK, 1.0)
-text(500, 696, 'OMAN', 'sans', 11, INK, 1.0)
+text(344, 619, 'BAHRAIN', 'sansb', 14, WHITE, 0.4)
+text(352, 540, 'IRAN', 'sansb', 21, INK, 0.9)
+text(66, 696, 'SAUDI ARABIA', 'sans', 12, INK, 0.4)
+text(500, 696, 'OMAN', 'sans', 12, INK, 0.4)
 # strike arcs from Iran to Bahrain
 for k, off in enumerate((0, 14, 28)):
     pts = []
@@ -315,19 +319,19 @@ for tx, ty, s in ((545, 610, 1.0), (576, 666, 0.8)):
     fill_rect(tx - 7 * s, ty - 7 * s, tx + 3 * s, ty, WHITE)
     thick_line(tx + 8 * s, ty - 12 * s, tx + 8 * s, ty, 1.4, INK)
 # strait label
-text(412, 642, 'STRAIT OF', 'sansb', 11, (225, 232, 236), 1.0)
-text(412, 656, 'HORMUZ', 'sansb', 11, (225, 232, 236), 1.0)
+text(412, 642, 'STRAIT OF', 'sansb', 12, (225, 232, 236), 0.4)
+text(412, 656, 'HORMUZ', 'sansb', 12, (225, 232, 236), 0.4)
 # caption bar
 fill_rect(MX0, MY1 - 30, MX1, MY1, INK)
-text(MX0 + 14, MY1 - 7, '114', 'sansb', 25, WHITE, 0.0)
-text(MX0 + 70, MY1 - 8, 'CROSSINGS IN 3 DAYS', 'sansb', 11, WHITE, 1.0)
+text(MX0 + 14, MY1 - 7, '114', 'sansb', 27, WHITE, 0.0)
+text(MX0 + 70, MY1 - 8, 'CROSSINGS IN 3 DAYS', 'sansb', 12.5, WHITE, 0.4)
 
 # ---------------------------------------------------------------- right column
 RX0, RX1 = 628, 988
 # COP31
-text(RX0, 240, 'CLIMATE  ·  ANTALYA', 'sansb', 13, RED, 2.0)
-text(RX0 - 1, 288, 'COP31 ENDS', 'serif', 37, INK, -0.6)
-text(RX0 - 1, 328, 'WITH NO DEAL', 'serif', 37, INK, -0.6)
+text(RX0, 240, 'CLIMATE  ·  ANTALYA', 'sansb', 13.5, RED, 1.0)
+text(RX0 - 1, 288, 'COP31 ENDS', 'serif', 38, INK, -0.5)
+text(RX0 - 1, 328, 'WITH NO DEAL', 'serif', 38, INK, -0.5)
 paragraph(RX0, 358, 'No deal on fossil fuels as EU delegates walk out.',
           'sans', 16, 352, 20, (52, 51, 47))
 # globe + failure mark
@@ -338,16 +342,16 @@ fill_poly([[(gx + 4, gy + 3), (gx + 17, gy - 2), (gx + 20, gy + 10), (gx + 8, gy
 thick_line(gx - 22, gy, gx + 22, gy, 1.0, (143, 190, 205), 0.7)
 thick_line(gx, gy - 23, gx, gy + 23, 1.0, (143, 190, 205), 0.5)
 thick_line(gx - 15, gy + 18, gx + 17, gy - 18, 5, RED)
-text(RX0 + 64, 414, 'LONGEST COP', 'sansb', 11, MUTED, 1.0)
-text(RX0 + 64, 430, 'ON RECORD', 'sansb', 11, MUTED, 1.0)
-text(RX0 + 64, 446, '48 HOURS OF OVERTIME', 'sans', 10, MUTED, 0.5)
+text(RX0 + 64, 414, 'LONGEST COP', 'sansb', 11.5, MUTED, 0.6)
+text(RX0 + 64, 430, 'ON RECORD', 'sansb', 11.5, MUTED, 0.6)
+text(RX0 + 64, 446, '48 HOURS OF OVERTIME', 'sans', 10.5, MUTED, 0.3)
 
 fill_rect(RX0, 474, RX1, 476, (190, 182, 166))
 
 # Ukraine / Libya
-text(RX0, 502, 'EUROPE  ·  AFRICA', 'sansb', 13, RED, 2.0)
-text(RX0 - 1, 550, 'DRONES HIT', 'serif', 37, INK, -0.6)
-text(RX0 - 1, 590, 'RUSSIAN SHIP', 'serif', 37, INK, -0.6)
+text(RX0, 502, 'EUROPE  ·  AFRICA', 'sansb', 13.5, RED, 1.0)
+text(RX0 - 1, 550, 'DRONES HIT', 'serif', 38, INK, -0.5)
+text(RX0 - 1, 590, 'RUSSIAN SHIP', 'serif', 38, INK, -0.5)
 paragraph(RX0, 620, 'Suspected Ukrainian sea drones strike the Merkury at Benghazi; Odesa hit by blackouts.',
           'sans', 16, 352, 20, (52, 51, 47))
 # sea strip with ship and drones
@@ -366,8 +370,8 @@ for dx in (-58, -34):
 for a in range(8):
     ang = a * math.pi / 4
     thick_line(sx + 26, sy - 8, sx + 26 + 12 * math.cos(ang), sy - 8 + 12 * math.sin(ang), 2.2, GOLD)
-text(RX0 + 8, 690, 'BENGHAZI', 'sansb', 10, (225, 232, 236), 1.2)
-text(RX1 - 8, 690, 'ODESA', 'sansb', 10, (225, 232, 236), 1.2, 'right')
+text(RX0 + 8, 690, 'BENGHAZI', 'sansb', 11, (225, 232, 236), 0.6)
+text(RX1 - 8, 690, 'ODESA', 'sansb', 11, (225, 232, 236), 0.6, 'right')
 
 # ---------------------------------------------------------------- bottom band
 fill_rect(36, 764, 988, 766, INK)
@@ -401,16 +405,18 @@ for x0, x1, kick, h1, h2, deck, icon in cols:
             fill_rect(x0 + 14 + i * 7, 814, x0 + 17 + i * 7, 820, INK)
             fill_rect(x0 + 5, 792 + i * 7, x0 + 11, 795 + i * 7, INK)
             fill_rect(x0 + 35, 792 + i * 7, x0 + 41, 795 + i * 7, INK)
-    text(x0 + 56, 800, kick, 'sansb', 11, RED, 1.4)
-    text(x0 - 1, 852, h1, 'serif', 28, INK, -0.4)
-    text(x0 - 1, 882, h2, 'serif', 28, INK, -0.4)
-    paragraph(x0, 906, deck, 'sans', 13.5, x1 - x0, 16, (58, 56, 51))
+    text(x0 + 56, 800, kick, 'sansb', 12, RED, 0.8)
+    text(x0 - 1, 852, h1, 'serif', 30, INK, -0.3)
+    text(x0 - 1, 882, h2, 'serif', 30, INK, -0.3)
+    paragraph(x0, 906, deck, 'sans', 15, x1 - x0, 17.5, (58, 56, 51))
 
 # ---------------------------------------------------------------- footer
-fill_rect(0, 952, W, H, INK)
-text(512, 980, 'ALSO INSIDE:  ISRAEL COALITION TALKS STALL  ·  WEST BANK SETTLER ARSON CONDEMNED  ·  HAITI FOOD CRISIS',
-     'sansb', 12, (232, 226, 213), 0.6, 'center')
-text(512, 1008, 'THE WORLD  ·  MONDAY 23 NOVEMBER 2026  ·  PAGE 1 OF 1', 'sans', 11, (147, 145, 137), 1.2, 'center')
+fill_rect(0, 944, W, H, INK)
+text(512, 970, 'ALSO INSIDE:  ISRAEL COALITION TALKS STALL',
+     'sansb', 17.5, (232, 226, 213), 0.3, 'center')
+text(512, 990, 'WEST BANK SETTLER ARSON CONDEMNED  ·  HAITI FOOD CRISIS',
+     'sansb', 17.5, (232, 226, 213), 0.3, 'center')
+text(512, 1012, 'THE WORLD  ·  MONDAY 23 NOVEMBER 2026  ·  PAGE 1 OF 1', 'sans', 10.5, (147, 145, 137), 0.6, 'center')
 
 # ---------------------------------------------------------------- PNG
 raw = bytearray()
