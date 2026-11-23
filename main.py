@@ -271,9 +271,9 @@ text(988, 214, 'SIX STORIES  ·  WORLDWIDE', 'sans', 13, MUTED, 1.4, 'right')
 # ---------------------------------------------------------------- lead
 LX0, LX1 = 36, 604
 text(LX0, 240, 'LEAD STORY  ·  GULF', 'sansb', 14, RED, 2.4)
-text(LX0 - 2, 294, 'IRAN CLAIMS', 'serif', 50, INK, -1.0)
-text(LX0 - 2, 348, 'STRIKES ON US', 'serif', 50, INK, -1.0)
-text(LX0 - 2, 402, 'BASES IN BAHRAIN', 'serif', 50, INK, -1.0)
+text(LX0 - 2, 294, 'IRAN CLAIMS', 'serif', 52, INK, -1.0)
+text(LX0 - 2, 348, 'STRIKES ON US', 'serif', 52, INK, -1.0)
+text(LX0 - 2, 402, 'BASES IN BAHRAIN', 'serif', 52, INK, -1.0)
 paragraph(LX0, 438, "Trump seeks a \u2018permanent\u2019 deal as attacks on Hormuz shipping escalate and oil holds near $92.",
           'sans', 19, 548, 24, (44, 44, 41))
 
@@ -309,7 +309,7 @@ for k, off in enumerate((0, 14, 28)):
     dashed_curve(pts, 2.2, (232, 92, 62), 0.95, 8, 7)
 # arrow head
 fill_poly([[(318, 606), (334, 614), (318, 622)]], (232, 92, 62))
-# tankers
+# tankers, one burning
 for tx, ty, s in ((545, 610, 1.0), (576, 666, 0.8)):
     fill_poly([[(tx - 20 * s, ty), (tx + 20 * s, ty), (tx + 14 * s, ty + 8 * s), (tx - 14 * s, ty + 8 * s)]], INK)
     fill_rect(tx - 7 * s, ty - 7 * s, tx + 3 * s, ty, WHITE)
@@ -319,7 +319,8 @@ text(412, 642, 'STRAIT OF', 'sansb', 11, (225, 232, 236), 1.0)
 text(412, 656, 'HORMUZ', 'sansb', 11, (225, 232, 236), 1.0)
 # caption bar
 fill_rect(MX0, MY1 - 30, MX1, MY1, INK)
-text(MX0 + 12, MY1 - 10, 'HORMUZ SHIPPING: 114 CROSSINGS IN 3 DAYS', 'sansb', 13, WHITE, 0.7)
+text(MX0 + 14, MY1 - 7, '114', 'sansb', 25, WHITE, 0.0)
+text(MX0 + 70, MY1 - 8, 'CROSSINGS IN 3 DAYS', 'sansb', 11, WHITE, 1.0)
 
 # ---------------------------------------------------------------- right column
 RX0, RX1 = 628, 988
