@@ -202,8 +202,8 @@ def dashed_curve(pts, w, c, alpha=1.0, dash=9, gap=7):
 
 
 # ---------------------------------------------------------------- type
-with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fonts.py'), 'r', encoding='utf-8') as f:
-    FONTS = json.loads(f.read().split("json.loads(r'''", 1)[1].rsplit("''')", 1)[0])
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fonts.json'), 'r', encoding='utf-8') as f:
+    FONTS = json.load(f)
 
 
 def text_width(s, font, size, tracking=0.0):
